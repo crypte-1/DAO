@@ -2,6 +2,7 @@
 pragma solidity ^0.8.0;
 
 import "@openzeppelin/contracts/access/Ownable.sol";
+// import "hardhat/console.sol";
 
 /**
  * Interface for the FakeNFTMarketplace
@@ -154,7 +155,7 @@ contract CryptoDevsDAO is Ownable {
         // Calculate how many NFTs are owned by the voter
         // that haven't already been used for voting on this proposal
         for (uint256 i = 0; i < voterNFTBalance; i++) {
-            console.log(cryptoDevsNFT.tokenOfOwnerByIndex(msg.sender, i));
+            // console.log(cryptoDevsNFT.tokenOfOwnerByIndex(msg.sender, i));
             uint256 tokenId = cryptoDevsNFT.tokenOfOwnerByIndex(msg.sender, i);
             if (proposal.voters[tokenId] == false) {
                 numVotes++;
