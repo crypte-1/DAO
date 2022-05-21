@@ -62,4 +62,15 @@ contract CryptoDevsDAO is Ownable {
         mapping(uint256 => bool) voters;
     }
     
+    // Create an enum named Vote containing possible options for a vote
+    enum Vote {
+        YAY,
+        NAY
+    }
+
+    // Create a mapping of ID to Proposal
+    mapping(uint256 => Proposal) public proposals;
+    // Number of proposals that have been created
+    uint256 public numProposals;
+    
 }
