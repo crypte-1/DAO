@@ -1,5 +1,5 @@
 const { ethers } = require("hardhat");
-const { CRYPTODEVS_NFT_CONTRACT_ADDRESS } = require("../constants");
+const { CRYPTODEVS_NFT_CONTRACT_ADDRESS } = require("../constants.js");
 
 async function main() {
   // Deploy the FakeNFTMarketplace contract first
