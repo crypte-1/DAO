@@ -203,3 +203,7 @@ contract CryptoDevsDAO is Ownable {
     fallback() external payable {}
 
 }
+
+
+CryptoDevsDAO deployed to:  0x766bB3a342Cc8cA744614Eb1EAE8f3Cb1E51C562
+
