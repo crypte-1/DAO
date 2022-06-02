@@ -2,6 +2,7 @@
 pragma solidity ^0.8.0;
 
 import "@openzeppelin/contracts/access/Ownable.sol";
+
 // import "hardhat/console.sol";
 
 /**
@@ -20,7 +21,6 @@ interface IFakeNFTMarketplace {
     /// @param _tokenId - the fake NFT tokenID to purchase
     function purchase(uint256 _tokenId) external payable;
 }
-
 
 /**
  * Minimal interface for CryptoDevsNFT containing only two functions
@@ -41,13 +41,12 @@ interface ICryptoDevsNFT {
         returns (uint256);
 }
 
-
 // We will add the Interfaces here
 
 contract CryptoDevsDAO is Ownable {
     IFakeNFTMarketplace nftMarketplace;
     ICryptoDevsNFT cryptoDevsNFT;
-// Create a struct named Proposal containing all relevant information
+    // Create a struct named Proposal containing all relevant information
     struct Proposal {
         // nftTokenId - the tokenID of the NFT to purchase from FakeNFTMarketplace if the proposal passes
         uint256 nftTokenId;
@@ -62,7 +61,7 @@ contract CryptoDevsDAO is Ownable {
         // voters - a mapping of CryptoDevsNFT tokenIDs to booleans indicating whether that NFT has already been used to cast a vote or not
         mapping(uint256 => bool) voters;
     }
-    
+
     // Create an enum named Vote containing possible options for a vote
     enum Vote {
         YAY,
@@ -74,9 +73,6 @@ contract CryptoDevsDAO is Ownable {
     // Number of proposals that have been created
     uint256 public numProposals;
 
-
-
-    
     // Create a modifier which only allows a function to be
     // called by someone who owns at least 1 CryptoDevsNFT
     modifier nftHolderOnly() {
@@ -92,7 +88,7 @@ contract CryptoDevsDAO is Ownable {
             "DEADLINE_EXCEEDED"
         );
         _;
-    } 
+    }
 
     // Create a modifier which only allows a function to be
     // called if the given proposals' deadline HAS been exceeded
@@ -109,7 +105,6 @@ contract CryptoDevsDAO is Ownable {
         _;
     }
 
-    
     // Create a payable constructor which initializes the contract
     // instances for FakeNFTMarketplace and CryptoDevsNFT
     // The payable allows this constructor to accept an ETH deposit when it is being deployed
@@ -118,7 +113,6 @@ contract CryptoDevsDAO is Ownable {
         cryptoDevsNFT = ICryptoDevsNFT(_cryptoDevsNFT);
     }
 
-    
     /// @dev createProposal allows a CryptoDevsNFT holder to create a new proposal in the DAO
     /// @param _nftTokenId - the tokenID of the NFT to be purchased from FakeNFTMarketplace if this proposal passes
     /// @return Returns the proposal index for the newly created proposal
@@ -138,7 +132,6 @@ contract CryptoDevsDAO is Ownable {
         return numProposals - 1;
     }
 
-    
     /// @dev voteOnProposal allows a CryptoDevsNFT holder to cast their vote on an active proposal
     /// @param proposalIndex - the index of the proposal to vote on in the proposals array
     /// @param vote - the type of vote they want to cast
@@ -194,16 +187,12 @@ contract CryptoDevsDAO is Ownable {
     function withdrawEther() external onlyOwner {
         payable(owner()).transfer(address(this).balance);
     }
-    
 
     // The following two functions allow the contract to accept ETH deposits directly
     // from a wallet without calling a function
     receive() external payable {}
 
     fallback() external payable {}
-
 }
 
-
-CryptoDevsDAO deployed to:  0x766bB3a342Cc8cA744614Eb1EAE8f3Cb1E51C562
-
+// CryptoDevsDAO deployed to:  0x766bB3a342Cc8cA744614Eb1EAE8f3Cb1E51C562
